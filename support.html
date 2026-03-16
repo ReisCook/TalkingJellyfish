@@ -84,9 +84,50 @@
     .contact-box a:hover { opacity: 0.85; }
     a { color: #8B5CF6; text-decoration: none; }
     a:hover { text-decoration: underline; }
+    .nav {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 20px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-brand {
+      color: #f5f5f7;
+      font-weight: 600;
+      font-size: 1em;
+      text-decoration: none;
+    }
+    .nav-brand:hover { opacity: 0.8; }
+    .nav-links a {
+      color: #86868b;
+      margin-left: 24px;
+      font-size: 0.9em;
+    }
+    .nav-links a:hover { color: #f5f5f7; text-decoration: none; }
+    footer {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 40px 0 60px;
+      border-top: 1px solid #1c1c1e;
+    }
+    footer a {
+      color: #86868b;
+      margin: 0 16px;
+      font-size: 0.9em;
+    }
+    footer a:hover { color: #f5f5f7; text-decoration: none; }
+    footer .copy { color: #48484a; font-size: 0.85em; margin-top: 12px; }
   </style>
 </head>
 <body>
+  <nav class="nav">
+    <a href="/" class="nav-brand">Talking Jellyfish</a>
+    <div class="nav-links">
+      <a href="privacy.html">Privacy</a>
+    </div>
+  </nav>
   <div class="container">
     <h1>Support</h1>
     <p class="subtitle">Talking Jellyfish: AI Friends</p>
@@ -149,5 +190,13 @@
       <a href="mailto:support@talkingjellyfish.com">Email Support</a>
     </div>
   </div>
+  <footer>
+    <div>
+      <a href="/">Home</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="support.html">Support</a>
+    </div>
+    <p class="copy">&copy; 2026 Talking Jellyfish</p>
+  </footer>
 </body>
 </html>
