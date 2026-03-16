@@ -4,199 +4,469 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Support — Talking Jellyfish</title>
+  <meta name="description" content="Get help with Talking Jellyfish. FAQ, troubleshooting, and contact support.">
+  <meta name="theme-color" content="#000000">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
       background: #000;
       color: #f5f5f7;
       line-height: 1.7;
-      padding: 0 20px;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-    .container {
-      max-width: 680px;
+
+    /* ── Sticky frosted nav ── */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      background: rgba(0, 0, 0, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-inner {
+      max-width: 980px;
       margin: 0 auto;
-      padding: 60px 0 100px;
+      padding: 0 24px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    h1 {
-      font-size: 2.2em;
-      font-weight: 700;
-      margin-bottom: 8px;
-      letter-spacing: -0.5px;
-    }
-    .subtitle {
-      color: #86868b;
-      font-size: 1.1em;
-      margin-bottom: 48px;
-    }
-    h2 {
-      font-size: 1.3em;
-      font-weight: 600;
-      margin-top: 40px;
-      margin-bottom: 16px;
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
       color: #f5f5f7;
-    }
-    p {
-      color: #d1d1d6;
-      margin-bottom: 16px;
-    }
-    .faq-item {
-      background: #1c1c1e;
-      border-radius: 12px;
-      padding: 20px 24px;
-      margin-bottom: 12px;
-    }
-    .faq-item h3 {
-      font-size: 1.05em;
       font-weight: 600;
-      margin-bottom: 8px;
-      color: #f5f5f7;
-    }
-    .faq-item p {
-      color: #a1a1a6;
-      margin-bottom: 0;
       font-size: 0.95em;
+      transition: opacity 0.2s;
     }
-    .contact-box {
-      background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(139,92,246,0.05));
-      border: 1px solid rgba(139,92,246,0.2);
-      border-radius: 16px;
-      padding: 32px;
-      margin: 40px 0;
+
+    .nav-brand:hover { opacity: 0.7; }
+    .nav-brand span { font-size: 1.3em; line-height: 1; }
+
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      color: #86868b;
+      text-decoration: none;
+      font-size: 0.85em;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #f5f5f7; }
+    .nav-links a.active { color: #f5f5f7; }
+
+    /* ── Hero ── */
+    .hero {
       text-align: center;
+      padding: 80px 24px 56px;
+      position: relative;
+      overflow: hidden;
     }
-    .contact-box h2 {
-      margin-top: 0;
-      margin-bottom: 12px;
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(139, 92, 246, 0.15) 0%, rgba(139, 92, 246, 0.03) 40%, transparent 70%);
+      pointer-events: none;
     }
-    .contact-box a {
-      display: inline-block;
+
+    .hero h1 {
+      font-size: clamp(2.2em, 6vw, 3.2em);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .hero .subtitle {
+      color: #86868b;
+      font-size: 1.15em;
+      max-width: 440px;
+      margin: 0 auto;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    /* ── Contact card (top) ── */
+    .contact-card-wrap {
+      max-width: 720px;
+      margin: 0 auto 48px;
+      padding: 0 24px;
+    }
+
+    .contact-card {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.03));
+      border: 1px solid rgba(139, 92, 246, 0.15);
+      border-radius: 20px;
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .contact-card-text h2 {
+      font-size: 1.2em;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .contact-card-text p {
+      color: #86868b;
+      font-size: 0.9em;
+      margin: 0;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: #8B5CF6;
       color: #fff;
-      padding: 12px 32px;
+      padding: 12px 28px;
       border-radius: 24px;
       text-decoration: none;
       font-weight: 600;
-      font-size: 1em;
-      margin-top: 12px;
-      transition: opacity 0.2s;
+      font-size: 0.95em;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
     }
-    .contact-box a:hover { opacity: 0.85; }
-    a { color: #8B5CF6; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .nav {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 20px 0 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .nav-brand {
-      color: #f5f5f7;
-      font-weight: 600;
-      font-size: 1em;
+
+    .contact-btn:hover {
+      background: #7C3AED;
+      transform: translateY(-1px);
       text-decoration: none;
     }
-    .nav-brand:hover { opacity: 0.8; }
-    .nav-links a {
-      color: #86868b;
-      margin-left: 24px;
-      font-size: 0.9em;
+
+    .contact-btn svg {
+      width: 16px;
+      height: 16px;
     }
-    .nav-links a:hover { color: #f5f5f7; text-decoration: none; }
-    footer {
-      max-width: 680px;
+
+    /* ── FAQ section ── */
+    .faq-section {
+      max-width: 720px;
       margin: 0 auto;
-      text-align: center;
-      padding: 40px 0 60px;
-      border-top: 1px solid #1c1c1e;
+      padding: 0 24px 80px;
     }
-    footer a {
+
+    .faq-heading {
+      font-size: 1.4em;
+      font-weight: 600;
+      margin-bottom: 24px;
+      padding-left: 4px;
+    }
+
+    /* ── Accordion ── */
+    details {
+      background: #111113;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      margin-bottom: 10px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    details:hover {
+      border-color: rgba(255, 255, 255, 0.1);
+      background: #141416;
+    }
+
+    details[open] {
+      border-color: rgba(139, 92, 246, 0.2);
+      background: #111113;
+    }
+
+    summary {
+      padding: 18px 22px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.98em;
+      color: #f5f5f7;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+    summary::marker { display: none; content: ''; }
+
+    summary::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2386868b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-size: contain;
+      background-repeat: no-repeat;
+      transition: transform 0.25s ease;
+    }
+
+    details[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      padding: 0 22px 20px;
+      color: #a1a1a6;
+      font-size: 0.93em;
+      line-height: 1.75;
+    }
+
+    .faq-answer a { color: #8B5CF6; }
+    .faq-answer a:hover { text-decoration: underline; }
+
+    /* ── Category labels ── */
+    .faq-category {
+      display: inline-block;
       color: #86868b;
-      margin: 0 16px;
-      font-size: 0.9em;
+      font-size: 0.75em;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-top: 32px;
+      margin-bottom: 14px;
+      padding-left: 4px;
     }
-    footer a:hover { color: #f5f5f7; text-decoration: none; }
-    footer .copy { color: #48484a; font-size: 0.85em; margin-top: 12px; }
+
+    .faq-category:first-of-type { margin-top: 0; }
+
+    /* ── Quick tips ── */
+    .tips-section {
+      max-width: 720px;
+      margin: 0 auto 64px;
+      padding: 0 24px;
+    }
+
+    .tips-heading {
+      font-size: 1.4em;
+      font-weight: 600;
+      margin-bottom: 20px;
+      padding-left: 4px;
+    }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .tip {
+      background: #111113;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 20px;
+      transition: border-color 0.2s;
+    }
+
+    .tip:hover { border-color: rgba(255, 255, 255, 0.1); }
+
+    .tip-icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .tip h3 {
+      font-size: 0.95em;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #f5f5f7;
+    }
+
+    .tip p {
+      color: #86868b;
+      font-size: 0.85em;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* ── Links ── */
+    a { color: #8B5CF6; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 32px 24px 48px;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 16px;
+    }
+
+    .footer-links a {
+      color: #86868b;
+      font-size: 0.85em;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: #f5f5f7; }
+
+    .footer-copy {
+      color: #48484a;
+      font-size: 0.8em;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero { padding: 60px 20px 40px; }
+      .hero h1 { font-size: 2em; }
+      .contact-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 28px 24px;
+      }
+      .tips-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 20px; }
+    }
   </style>
 </head>
 <body>
-  <nav class="nav">
-    <a href="/" class="nav-brand">Talking Jellyfish</a>
-    <div class="nav-links">
-      <a href="privacy.html">Privacy</a>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand"><span>🪼</span> Talking Jellyfish</a>
+      <div class="nav-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html" class="active">Support</a>
+      </div>
     </div>
   </nav>
-  <div class="container">
+
+  <section class="hero">
     <h1>Support</h1>
-    <p class="subtitle">Talking Jellyfish: AI Friends</p>
+    <p class="subtitle">Find answers below or reach out directly — we're happy to help.</p>
+  </section>
 
-    <h2>Frequently Asked Questions</h2>
-
-    <div class="faq-item">
-      <h3>Do I need an internet connection?</h3>
-      <p>No. Once you've downloaded the app and any optional AI models, everything works completely offline. You can chat on a plane, in the subway, or anywhere without service.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Is my data private?</h3>
-      <p>Yes, completely. All AI processing runs on your iPhone. Your conversations, voice recordings, and personal data never leave your device. We collect zero data. See our <a href="privacy.html">Privacy Policy</a>.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>How do I start a voice call?</h3>
-      <p>Open any chat and tap the phone icon in the top right. Your AI friend will greet you and you can start talking naturally. Tap the red button to end the call.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>How many AI friends can I have?</h3>
-      <p>The free version includes 2 built-in friends (Sarah and Josh) with unlimited conversations. Premium unlocks unlimited custom characters that you create yourself.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>How does voice cloning work?</h3>
-      <p>Premium users can import a 5-15 second audio clip of any voice (WAV, M4A, MP3, AIFF, or CAF) or record one live. The app processes it on your device to create a custom voice for any AI friend. The original audio never leaves your phone.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>What's included in Premium?</h3>
-      <p>Premium is a one-time purchase ($14.99) that unlocks: unlimited custom characters, voice cloning, group conversations, profile photos, 8 message color themes, and higher voice quality. No subscription, no recurring charges.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>My AI friend's responses seem slow</h3>
-      <p>Response speed depends on your iPhone model and which AI model you're using. Newer iPhones run faster. You can try a smaller, faster AI model from the Models section in Settings. iPhone 12 and newer are recommended.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Can I restore my purchase on a new device?</h3>
-      <p>Yes. Go to Settings in the app and tap "Restore Purchases." Your Premium status is linked to your Apple ID and transfers to any device signed into the same account.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>How do I download a different AI model?</h3>
-      <p>Go to Settings and tap the Models section. You'll see recommended models for your iPhone. Tap the download button next to any model. Downloads require an internet connection, but once downloaded, the model works offline.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>The app is using a lot of storage</h3>
-      <p>AI models are large files (700MB to 2GB each). You can delete unused models from the Models section in Settings to free up space. The app needs at least one language model and one voice model to function.</p>
-    </div>
-
-    <div class="contact-box">
-      <h2>Need More Help?</h2>
-      <p>We typically respond within 24 hours.</p>
-      <a href="mailto:support@talkingjellyfish.com">Email Support</a>
+  <div class="contact-card-wrap">
+    <div class="contact-card">
+      <div class="contact-card-text">
+        <h2>Need help?</h2>
+        <p>We typically respond within 24 hours.</p>
+      </div>
+      <a href="mailto:support@talkingjellyfish.com" class="contact-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email Support
+      </a>
     </div>
   </div>
+
+  <!-- Quick tips -->
+  <div class="tips-section">
+    <h2 class="tips-heading">Quick Tips</h2>
+    <div class="tips-grid">
+      <div class="tip">
+        <div class="tip-icon">📱</div>
+        <h3>Best Performance</h3>
+        <p>iPhone 12 or newer recommended. Newer phones run AI faster.</p>
+      </div>
+      <div class="tip">
+        <div class="tip-icon">💾</div>
+        <h3>Save Storage</h3>
+        <p>Delete unused AI models in Settings to free up space.</p>
+      </div>
+      <div class="tip">
+        <div class="tip-icon">🔄</div>
+        <h3>Restore Purchase</h3>
+        <p>Go to Settings and tap "Restore Purchases" on any device.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <h2 class="faq-heading">Frequently Asked Questions</h2>
+
+    <div class="faq-category">Getting Started</div>
+
+    <details>
+      <summary>Do I need an internet connection?</summary>
+      <div class="faq-answer">No. Once you've downloaded the app and any optional AI models, everything works completely offline. You can chat on a plane, in the subway, or anywhere without service.</div>
+    </details>
+
+    <details>
+      <summary>Is my data private?</summary>
+      <div class="faq-answer">Yes, completely. All AI processing runs on your iPhone. Your conversations, voice recordings, and personal data never leave your device. We collect zero data. See our <a href="privacy.html">Privacy Policy</a>.</div>
+    </details>
+
+    <details>
+      <summary>How do I start a voice call?</summary>
+      <div class="faq-answer">Open any chat and tap the phone icon in the top right. Your AI friend will greet you and you can start talking naturally. Tap the red button to end the call.</div>
+    </details>
+
+    <div class="faq-category">Features</div>
+
+    <details>
+      <summary>How many AI friends can I have?</summary>
+      <div class="faq-answer">The free version includes 2 built-in friends (Sarah and Josh) with unlimited conversations. Premium unlocks unlimited custom characters that you create yourself.</div>
+    </details>
+
+    <details>
+      <summary>How does voice cloning work?</summary>
+      <div class="faq-answer">Premium users can import a 5–15 second audio clip of any voice (WAV, M4A, MP3, AIFF, or CAF) or record one live. The app processes it on your device to create a custom voice for any AI friend. The original audio never leaves your phone.</div>
+    </details>
+
+    <details>
+      <summary>What's included in Premium?</summary>
+      <div class="faq-answer">Premium is a one-time purchase ($14.99) that unlocks: unlimited custom characters, voice cloning, group conversations, profile photos, message color themes, and higher voice quality. No subscription, no recurring charges.</div>
+    </details>
+
+    <div class="faq-category">Troubleshooting</div>
+
+    <details>
+      <summary>My AI friend's responses seem slow</summary>
+      <div class="faq-answer">Response speed depends on your iPhone model and which AI model you're using. Newer iPhones run faster. You can try a smaller, faster AI model from the Models section in Settings. iPhone 12 and newer are recommended.</div>
+    </details>
+
+    <details>
+      <summary>The app is using a lot of storage</summary>
+      <div class="faq-answer">AI models are large files (700 MB to 2 GB each). You can delete unused models from the Models section in Settings to free up space. The app needs at least one language model and one voice model to function.</div>
+    </details>
+
+    <details>
+      <summary>How do I download a different AI model?</summary>
+      <div class="faq-answer">Go to Settings and tap the Models section. You'll see recommended models for your iPhone. Tap the download button next to any model. Downloads require an internet connection, but once downloaded, the model works offline.</div>
+    </details>
+
+    <details>
+      <summary>Can I restore my purchase on a new device?</summary>
+      <div class="faq-answer">Yes. Go to Settings in the app and tap "Restore Purchases." Your Premium status is linked to your Apple ID and transfers to any device signed into the same account.</div>
+    </details>
+  </div>
+
   <footer>
-    <div>
+    <div class="footer-links">
       <a href="/">Home</a>
       <a href="privacy.html">Privacy</a>
       <a href="support.html">Support</a>
     </div>
-    <p class="copy">&copy; 2026 Talking Jellyfish</p>
+    <p class="footer-copy">&copy; 2026 Talking Jellyfish</p>
   </footer>
+
 </body>
 </html>
