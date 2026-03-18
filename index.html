@@ -4,271 +4,344 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Talking Jellyfish — AI Friends, 100% Private</title>
-  <meta name="description" content="Talk to AI friends who remember you. Voice calls, text chat, custom characters, voice cloning — all running on your iPhone. No internet. No cloud. No subscription.">
-  <meta name="theme-color" content="#000000">
-  <link rel="apple-touch-icon" href="icon.png">
-  <!-- Open Graph -->
-  <meta property="og:title" content="Talking Jellyfish">
+  <meta name="description" content="AI friends who talk, listen, and remember you. Voice calls, text chat, voice cloning — running entirely on your iPhone. No internet. No cloud.">
+  <meta name="theme-color" content="#06060b">
+  <link rel="canonical" href="https://talkingjellyfish.com">
+  <meta property="og:title" content="Talking Jellyfish — AI Friends, 100% Private">
   <meta property="og:description" content="AI friends who talk, listen, and remember you — 100% on your iPhone. No internet needed.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://talkingjellyfish.com">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FF4081'/%3E%3Cstop offset='100%25' stop-color='%23880E4F'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M50 8C28 8 12 26 12 45c0 4 3 7 7 7h62c4 0 7-3 7-7C88 26 72 8 50 8z' fill='url(%23g)'/%3E%3Cpath d='M28 54q-6 14 0 32' stroke='%2381D4FA' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3Cpath d='M42 54q-2 16 0 36' stroke='%2381D4FA' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3Cpath d='M58 54q2 16 0 36' stroke='%2381D4FA' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3Cpath d='M72 54q6 14 0 32' stroke='%2381D4FA' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
-      background: #000;
-      color: #f5f5f7;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;
+      background: #06060b;
+      color: #e5e5ea;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ── Sticky frosted nav ── */
-    .navbar {
+    /* ── Navigation ── */
+    .nav {
       position: sticky;
       top: 0;
       z-index: 100;
       backdrop-filter: saturate(180%) blur(20px);
       -webkit-backdrop-filter: saturate(180%) blur(20px);
-      background: rgba(0, 0, 0, 0.72);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(6, 6, 11, 0.8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .nav-inner {
-      max-width: 980px;
+      max-width: 1080px;
       margin: 0 auto;
       padding: 0 24px;
-      height: 48px;
+      min-height: 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 16px;
     }
 
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      color: #f5f5f7;
+    .nav-logo {
       font-weight: 600;
-      font-size: 0.95em;
+      font-size: 0.95rem;
+      color: #e5e5ea;
+      text-decoration: none;
+      letter-spacing: -0.01em;
       transition: opacity 0.2s;
     }
-
-    .nav-brand:hover { opacity: 0.7; }
-    .nav-brand span { font-size: 1.3em; line-height: 1; }
+    .nav-logo:hover { opacity: 0.7; }
 
     .nav-links { display: flex; gap: 28px; }
     .nav-links a {
       color: #86868b;
       text-decoration: none;
-      font-size: 0.85em;
+      font-size: 0.85rem;
       font-weight: 500;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: #f5f5f7; }
+    .nav-links a:hover { color: #e5e5ea; }
 
     /* ── Hero ── */
     .hero {
-      min-height: calc(100vh - 48px);
+      position: relative;
+      overflow: hidden;
+      min-height: calc(100vh - 52px);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 60px 24px;
-      position: relative;
-      overflow: hidden;
+      padding: 80px 24px;
     }
 
-    .hero::before {
-      content: '';
+    .hero-ambient {
       position: absolute;
-      top: -40%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 800px;
-      height: 800px;
-      background: radial-gradient(circle, rgba(139, 92, 246, 0.25) 0%, rgba(139, 92, 246, 0.05) 40%, transparent 70%);
+      border-radius: 50%;
       pointer-events: none;
     }
 
-    .hero-icon {
-      font-size: 72px;
-      margin-bottom: 24px;
+    .hero-ambient-1 {
+      width: 700px;
+      height: 700px;
+      top: -300px;
+      left: 50%;
+      margin-left: -450px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+      filter: blur(60px);
+      animation: drift1 22s ease-in-out infinite;
+    }
+
+    .hero-ambient-2 {
+      width: 500px;
+      height: 500px;
+      top: -100px;
+      right: -150px;
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.07) 0%, transparent 70%);
+      filter: blur(50px);
+      animation: drift2 28s ease-in-out infinite;
+    }
+
+    .hero-ambient-3 {
+      width: 400px;
+      height: 400px;
+      bottom: -100px;
+      left: -100px;
+      background: radial-gradient(circle, rgba(255, 64, 129, 0.06) 0%, transparent 70%);
+      filter: blur(50px);
+      animation: drift3 18s ease-in-out infinite;
+    }
+
+    .hero-content {
       position: relative;
+      z-index: 1;
+      width: min(100%, 640px);
+    }
+
+    .hero-icon {
+      width: 108px;
+      height: 108px;
+      margin: 0 auto 36px;
+      position: relative;
+    }
+
+    .hero-icon::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 36px;
+      background: radial-gradient(ellipse, rgba(255, 64, 129, 0.18) 0%, transparent 70%);
+      filter: blur(8px);
+    }
+
+    .hero-icon svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 4px 20px rgba(255, 64, 129, 0.2));
     }
 
     .hero h1 {
-      font-size: clamp(2.5em, 7vw, 4em);
+      font-size: clamp(2.8rem, 6vw, 4rem);
       font-weight: 700;
-      letter-spacing: -1.5px;
-      line-height: 1.1;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
       margin-bottom: 16px;
-      position: relative;
     }
 
-    .tagline {
-      font-size: clamp(1em, 3vw, 1.35em);
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
       color: #86868b;
-      max-width: 520px;
-      line-height: 1.5;
-      margin-bottom: 40px;
-      position: relative;
-      padding: 0 8px;
+      max-width: 460px;
+      margin: 0 auto 44px;
+      line-height: 1.6;
     }
 
-    .app-store-btn {
+    .cta {
       display: inline-block;
-      position: relative;
-      transition: opacity 0.2s;
-    }
-    .app-store-btn:hover { opacity: 0.8; }
-    .app-store-btn img { height: 54px; }
-
-    .app-store-placeholder {
-      display: inline-block;
-      background: #f5f5f7;
-      color: #000;
-      padding: 14px 36px;
-      border-radius: 12px;
-      font-size: 1.05em;
+      padding: 14px 32px;
+      background: #fff;
+      color: #06060b;
+      border-radius: 980px;
+      font-size: 0.95rem;
       font-weight: 600;
-      position: relative;
-      transition: opacity 0.2s;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: opacity 0.2s, transform 0.15s;
     }
-    .app-store-placeholder:hover { opacity: 0.85; }
+    .cta:hover { opacity: 0.88; transform: translateY(-1px); }
 
     /* ── Features ── */
     .features {
-      max-width: 960px;
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 80px 24px 100px;
+      padding: 120px 24px;
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .features-header h2 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
     }
 
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 16px;
     }
 
-    .feature {
-      background: #111113;
+    .feature-card {
+      background: #0e0e16;
       border: 1px solid rgba(255, 255, 255, 0.05);
       border-radius: 16px;
       padding: 28px 24px;
-      transition: border-color 0.2s, background 0.2s;
+      transition: border-color 0.25s, transform 0.25s;
     }
 
-    .feature:hover {
+    .feature-card:hover {
       border-color: rgba(255, 255, 255, 0.1);
-      background: #141416;
+      transform: translateY(-2px);
     }
 
     .feature-icon {
-      font-size: 28px;
-      margin-bottom: 14px;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
     }
 
-    .feature h3 {
-      font-size: 1.1em;
+    .feature-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .feature-icon.cyan    { background: rgba(34, 211, 238, 0.1);  color: #22d3ee; }
+    .feature-icon.violet  { background: rgba(167, 139, 250, 0.1); color: #a78bfa; }
+    .feature-icon.amber   { background: rgba(245, 158, 11, 0.1);  color: #f59e0b; }
+    .feature-icon.blue    { background: rgba(96, 165, 250, 0.1);  color: #60a5fa; }
+    .feature-icon.rose    { background: rgba(244, 114, 182, 0.1); color: #f472b6; }
+    .feature-icon.emerald { background: rgba(52, 211, 153, 0.1);  color: #34d399; }
+
+    .feature-card h3 {
+      font-size: 1rem;
       font-weight: 600;
       margin-bottom: 8px;
+      letter-spacing: -0.01em;
     }
 
-    .feature p {
+    .feature-card p {
       color: #86868b;
-      font-size: 0.9em;
+      font-size: 0.9rem;
       line-height: 1.6;
     }
 
-    /* ── Privacy callout ── */
-    .privacy-banner {
+    /* ── Privacy ── */
+    .privacy {
       text-align: center;
-      padding: 80px 24px;
+      padding: 100px 24px;
       position: relative;
+      overflow: hidden;
     }
 
-    .privacy-banner::before {
+    .privacy::before {
       content: '';
       position: absolute;
-      top: 0;
+      top: 50%;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, -50%);
       width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(52, 199, 89, 0.12) 0%, transparent 70%);
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(52, 199, 89, 0.06) 0%, transparent 70%);
       pointer-events: none;
+    }
+
+    .privacy-inner {
+      position: relative;
+      z-index: 1;
     }
 
     .privacy-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(52, 199, 89, 0.1);
-      border: 1px solid rgba(52, 199, 89, 0.2);
-      color: #34C759;
-      padding: 8px 20px;
-      border-radius: 24px;
-      font-size: 0.82em;
+      background: rgba(52, 199, 89, 0.08);
+      border: 1px solid rgba(52, 199, 89, 0.15);
+      color: #34c759;
+      padding: 7px 18px;
+      border-radius: 980px;
+      font-size: 0.75rem;
       font-weight: 600;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      margin-bottom: 20px;
-      position: relative;
+      margin-bottom: 24px;
     }
 
     .privacy-badge svg {
       width: 14px;
       height: 14px;
+      flex-shrink: 0;
     }
 
-    .privacy-banner h2 {
-      font-size: clamp(1.8em, 5vw, 2.8em);
+    .privacy h2 {
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
       font-weight: 700;
-      letter-spacing: -1px;
+      letter-spacing: -0.025em;
       margin-bottom: 16px;
-      position: relative;
     }
 
-    .privacy-banner p {
+    .privacy-text {
       color: #86868b;
-      font-size: clamp(0.95em, 2.5vw, 1.15em);
-      max-width: 560px;
+      font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+      max-width: 520px;
       margin: 0 auto;
-      line-height: 1.6;
-      position: relative;
-      padding: 0 8px;
+      line-height: 1.65;
     }
 
-    /* ── Price ── */
+    /* ── Pricing ── */
     .pricing {
       text-align: center;
-      padding: 60px 24px 100px;
+      padding: 60px 24px 120px;
     }
 
-    .price-tag {
+    .price-card {
       display: inline-block;
-      background: linear-gradient(135deg, #8B5CF6, #6D28D9);
-      padding: 24px 44px;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(139, 92, 246, 0.04));
+      border: 1px solid rgba(139, 92, 246, 0.15);
       border-radius: 20px;
+      padding: 32px 52px;
       margin-bottom: 16px;
     }
 
-    .price-tag .amount {
-      font-size: clamp(1.8em, 5vw, 2.4em);
+    .price-amount {
+      font-size: clamp(2rem, 5vw, 2.6rem);
       font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
     }
 
-    .price-tag .label {
-      font-size: 0.95em;
-      color: rgba(255, 255, 255, 0.8);
+    .price-label {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 500;
     }
 
-    .pricing p {
+    .pricing-note {
       color: #86868b;
-      font-size: 1em;
+      font-size: 0.95rem;
     }
 
     /* ── Footer ── */
@@ -281,130 +354,252 @@
     .footer-links {
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       gap: 32px;
       margin-bottom: 16px;
     }
 
     .footer-links a {
       color: #86868b;
-      font-size: 0.85em;
+      font-size: 0.85rem;
       text-decoration: none;
       font-weight: 500;
       transition: color 0.2s;
     }
-    .footer-links a:hover { color: #f5f5f7; }
+    .footer-links a:hover { color: #e5e5ea; }
 
     .footer-copy {
       color: #48484a;
-      font-size: 0.8em;
+      font-size: 0.8rem;
     }
 
-    /* ── Mobile ── */
-    @media (max-width: 600px) {
-      .hero {
-        min-height: calc(100svh - 48px);
-        padding: 48px 20px;
-      }
-      .hero-icon { font-size: 56px; margin-bottom: 20px; }
-      .hero h1 { letter-spacing: -1px; }
-      .tagline { margin-bottom: 32px; }
-      .app-store-placeholder { padding: 12px 28px; font-size: 0.95em; }
-      .features { padding: 48px 16px 64px; }
-      .features-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-      .feature { padding: 22px 20px; }
-      .privacy-banner { padding: 56px 20px; }
-      .pricing { padding: 40px 20px 72px; }
-      .price-tag { padding: 20px 36px; }
-      .footer-links { gap: 24px; }
-      .nav-links { gap: 20px; }
+    /* ── Animations ── */
+    @keyframes drift1 {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-30px); }
+    }
+    @keyframes drift2 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-25px, 15px); }
+    }
+    @keyframes drift3 {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-18px); }
     }
 
-    /* Small phones (SE, etc.) */
-    @media (max-width: 375px) {
-      .hero { padding: 36px 16px; }
-      .hero-icon { font-size: 48px; }
-      .features-grid { gap: 10px; }
-      .feature { padding: 20px 16px; }
-      .price-tag { padding: 18px 28px; }
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-inner { padding: 10px 20px; }
+      .nav-links { gap: 18px; }
+      .hero { min-height: calc(100svh - 52px); padding: 60px 20px; }
+      .hero-icon { width: 88px; height: 88px; margin-bottom: 28px; }
+      .features { padding: 80px 20px; }
+      .features-header { margin-bottom: 40px; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .feature-card { padding: 24px 20px; }
+      .privacy { padding: 80px 20px; }
+      .pricing { padding: 40px 20px 80px; }
+      .price-card { padding: 28px 40px; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-inner {
+        padding: 10px 16px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .nav-logo { font-size: 0.9rem; }
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 14px 18px;
+      }
+      .nav-links a { font-size: 0.82rem; }
+      .hero { padding: 48px 16px; }
+      .hero-ambient-2,
+      .hero-ambient-3 { display: none; }
+      .hero-icon { width: 72px; height: 72px; margin-bottom: 24px; }
+      .hero-subtitle { margin-bottom: 36px; }
+      .cta {
+        display: inline-flex;
+        justify-content: center;
+        width: 100%;
+        max-width: 320px;
+        padding: 13px 28px;
+        font-size: 0.9rem;
+      }
+      .features { padding: 64px 16px; }
+      .features-grid { grid-template-columns: 1fr; gap: 10px; }
+      .feature-card { padding: 22px 18px; }
+      .privacy { padding: 64px 16px; }
+      .price-card {
+        width: 100%;
+        max-width: 340px;
+        padding: 24px 24px;
+      }
+      .pricing-note {
+        max-width: 320px;
+        margin: 0 auto;
+      }
+      .footer-links { gap: 14px 24px; }
     }
   </style>
 </head>
 <body>
 
-  <nav class="navbar">
+  <nav class="nav">
     <div class="nav-inner">
-      <a href="/" class="nav-brand"><span>🪼</span> Talking Jellyfish</a>
+      <a href="index.html" class="nav-logo">Talking Jellyfish</a>
       <div class="nav-links">
+        <a href="terms.html">Terms</a>
         <a href="privacy.html">Privacy</a>
         <a href="support.html">Support</a>
       </div>
     </div>
   </nav>
 
-  <section class="hero">
-    <div class="hero-icon">🪼</div>
-    <h1>Talking Jellyfish</h1>
-    <p class="tagline">AI friends who talk, listen, and remember you. 100% on your iPhone. Nothing ever leaves your device.</p>
-    <span class="app-store-placeholder">Coming Soon to the App Store</span>
-  </section>
+  <main>
+    <section class="hero">
+      <div class="hero-ambient hero-ambient-1"></div>
+      <div class="hero-ambient hero-ambient-2"></div>
+      <div class="hero-ambient hero-ambient-3"></div>
+      <div class="hero-content">
+        <div class="hero-icon">
+          <svg viewBox="0 0 100 100" fill="none">
+            <defs>
+              <linearGradient id="jg" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#FF4081"/>
+                <stop offset="100%" stop-color="#880E4F"/>
+              </linearGradient>
+              <linearGradient id="tg" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#81D4FA"/>
+                <stop offset="100%" stop-color="#0277BD"/>
+              </linearGradient>
+            </defs>
+            <g transform="translate(0, -5)">
+              <path d="M 32 60 Q 25 75 32 85 A 3 3 0 0 0 38 85 Q 36 75 38 60" fill="url(#tg)"/>
+              <path d="M 45 60 Q 40 80 45 92 A 3 3 0 0 0 51 92 Q 48 80 51 60" fill="url(#tg)"/>
+              <path d="M 58 60 Q 64 78 58 90 A 3 3 0 0 0 64 88 Q 63 75 64 60" fill="url(#tg)"/>
+              <ellipse cx="50" cy="62" rx="28" ry="4" fill="#FF4081"/>
+              <path d="M 22 62 C 22 15, 78 15, 78 62 C 78 72, 22 72, 22 62 Z" fill="url(#jg)"/>
+              <path d="M 24 60 C 24 20, 76 20, 76 60 C 76 68, 24 68, 24 60 Z" fill="#FF80AB" opacity="0.3"/>
+              <circle cx="36" cy="48" r="5" fill="#1C1C1E"/>
+              <circle cx="64" cy="48" r="5" fill="#1C1C1E"/>
+              <circle cx="37" cy="46" r="2.5" fill="#fff" opacity="0.6"/>
+              <circle cx="65" cy="46" r="2.5" fill="#fff" opacity="0.6"/>
+              <path d="M 47 52 Q 50 54 53 52" fill="none" stroke="#1C1C1E" stroke-width="2" stroke-linecap="round"/>
+              <path d="M 18 50 C 18 10, 82 10, 82 50" fill="none" stroke="#BA68C8" stroke-width="5" stroke-linecap="round"/>
+              <rect x="15" y="45" width="8" height="15" rx="4" fill="#4FC3F7"/>
+              <rect x="77" y="45" width="8" height="15" rx="4" fill="#4FC3F7"/>
+              <path d="M 19 55 Q 19 65 30 62" fill="none" stroke="#BA68C8" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="32" cy="61" r="3.5" fill="#29B6F6"/>
+            </g>
+          </svg>
+        </div>
+        <h1>Talking Jellyfish</h1>
+        <p class="hero-subtitle">AI friends who talk, listen, and remember you. Completely private. Entirely on your iPhone.</p>
+        <span class="cta">Coming Soon to the App Store</span>
+      </div>
+    </section>
 
-  <section class="features">
-    <div class="features-grid">
-      <div class="feature">
-        <div class="feature-icon">🗣️</div>
-        <h3>Real Voice Conversations</h3>
-        <p>Tap the call button and start talking. Your AI friends listen and respond with their own unique voice.</p>
+    <section class="features">
+      <div class="features-header">
+        <h2>Everything on your device</h2>
       </div>
-      <div class="feature">
-        <div class="feature-icon">💬</div>
-        <h3>They Remember You</h3>
-        <p>Every conversation builds on the last. They remember your name, your stories, your favorite things.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon cyan">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="2" width="6" height="11" rx="3"/>
+              <path d="M19 10v1a7 7 0 0 1-14 0v-1"/>
+              <path d="M12 18v3M8 21h8"/>
+            </svg>
+          </div>
+          <h3>Real Voice Conversations</h3>
+          <p>Tap the call button and start talking. Your AI friends listen and respond with their own unique voice.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon violet">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <h3>They Remember You</h3>
+          <p>Every conversation builds on the last. They remember your name, your stories, your favorite things.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon amber">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="8.5" cy="7" r="4"/>
+              <line x1="20" y1="8" x2="20" y2="14"/>
+              <line x1="23" y1="11" x2="17" y2="11"/>
+            </svg>
+          </div>
+          <h3>Create Your Own</h3>
+          <p>Design AI friends with their own personality, voice, and style. Choose built-in voices or clone any voice.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon blue">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3>Group Conversations</h3>
+          <p>Add multiple AI friends to one chat and watch them interact with each other — and with you.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon rose">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M2 10v4M6 6v12M10 3v18M14 6v12M18 8v8M22 10v4"/>
+            </svg>
+          </div>
+          <h3>Clone Any Voice</h3>
+          <p>Import a short audio clip and your AI friend speaks in that voice. Give every character a unique sound.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon emerald">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <h3>Works Offline</h3>
+          <p>No internet needed. Chat on a plane, in the subway, or anywhere without service.</p>
+        </div>
       </div>
-      <div class="feature">
-        <div class="feature-icon">✨</div>
-        <h3>Create Your Own</h3>
-        <p>Design AI friends with their own personality, voice, and style. Choose built-in voices or clone any voice.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">👥</div>
-        <h3>Group Conversations</h3>
-        <p>Add multiple AI friends to one chat and watch them interact with each other — and with you.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">🎙️</div>
-        <h3>Clone Any Voice</h3>
-        <p>Import a short audio clip and your AI friend speaks in that voice. Give every character a unique sound.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">📴</div>
-        <h3>Works Offline</h3>
-        <p>No internet needed. Chat on a plane, in the subway, or anywhere without service.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="privacy-banner">
-    <div class="privacy-badge">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      No Data Collected
-    </div>
-    <h2>Your phone. Your data.</h2>
-    <p>There is no server. There is no cloud. The AI runs directly on your iPhone. Your conversations never go anywhere. Not to us. Not to anyone.</p>
-  </section>
+    <section class="privacy">
+      <div class="privacy-inner">
+        <div class="privacy-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          No Data Collected
+        </div>
+        <h2>Your phone. Your data.</h2>
+        <p class="privacy-text">There is no server. There is no cloud. The AI runs directly on your iPhone. Your conversations never go anywhere. Not to us. Not to anyone.</p>
+      </div>
+    </section>
 
-  <section class="pricing">
-    <div class="price-tag">
-      <div class="amount">$14.99</div>
-      <div class="label">one time, forever</div>
-    </div>
-    <p>Free to start. No subscription. No monthly fees.</p>
-  </section>
+    <section class="pricing">
+      <div class="price-card">
+        <div class="price-amount">$14.99</div>
+        <div class="price-label">One time. Forever yours.</div>
+      </div>
+      <p class="pricing-note">Free to start with two AI friends. No subscription.</p>
+    </section>
+  </main>
 
   <footer>
     <div class="footer-links">
+      <a href="terms.html">Terms of Use</a>
       <a href="privacy.html">Privacy Policy</a>
       <a href="support.html">Support</a>
     </div>
