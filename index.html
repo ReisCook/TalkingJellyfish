@@ -24,7 +24,8 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;
-      background: #06060b;
+      background: linear-gradient(180deg, #0c0c18 0%, #080810 30%, #050508 100%);
+      min-height: 100vh;
       color: #e5e5ea;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
@@ -92,13 +93,15 @@
     }
 
     .hero-ambient-1 {
-      width: 700px;
-      height: 700px;
-      top: -300px;
+      width: 1000px;
+      height: 600px;
+      top: -280px;
       left: 50%;
       transform: translateX(-50%);
-      background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
-      filter: blur(60px);
+      background:
+        radial-gradient(ellipse 60% 50%, rgba(180, 220, 255, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 100% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+      filter: blur(50px);
       animation: drift1 22s ease-in-out infinite;
     }
 
@@ -512,6 +515,7 @@
       </div>
     </section>
 
+    <!-- Pricing hidden until app launch
     <section class="pricing">
       <div class="price-card">
         <div class="price-amount">$14.99</div>
@@ -519,6 +523,7 @@
       </div>
       <p class="pricing-note">Free to start with two AI friends. No subscription.</p>
     </section>
+    -->
   </main>
 
   <footer>
